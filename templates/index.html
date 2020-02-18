@@ -1,6 +1,9 @@
 <html>
 <head>
   <style>
+    table, th, td {
+  border: 1px solid black;
+}
     html {
   scroll-behavior: smooth;
 }
@@ -145,6 +148,7 @@ img{ max-width:100%;}
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -160,7 +164,11 @@ img{ max-width:100%;}
               <div class="incoming_msg_img"> <img src="/static/profile.png" alt=".."> </div>
               <div class="received_msg">
                 <div class="received_withd_msg">
-                  <p>Welcome to NTPC ramagundam<br>start typing menu to start conversation</p>
+                  <p>Welcome to NTPC ramagundam</p>
+                  </div>
+                  
+                <div class="received_withd_msg">
+                  <p>please type your employee no</p>
                   </div>
               </div>
             </div>
@@ -183,7 +191,19 @@ img{ max-width:100%;}
         $(".msg_history").append(userHtml);
         document.getElementById('inp').scrollTop=document.getElementById('inp').scrollHeight;
         $.get("/get", { msg: rawText }).done(function(data) {
-          var botHtml = '<div class="incoming_msg"><div class="incoming_msg_img"> <img src="/static/profile.png" alt=".."> </div><div class="received_msg"><div class="received_withd_msg"><p>'+data+'</p></div></div></div>';
+          var botHtml = '<div class="incoming_msg"><div class="incoming_msg_img"> <img src="/static/profile.png" alt=".."> </div><div class="received_msg"><div class="received_withd_msg"><p>'+data+'</p></div><button onclick="getBotResponse1()"class="btn btn-outline-primary" style="margin-bottom:5px;border-radius:30px;"type="submit">Back</button></div></div>';
+          $(".msg_history").append(botHtml);
+          document.getElementById('inp').scrollTop=document.getElementById('inp').scrollHeight;
+        });
+      }
+      function getBotResponse1() {
+        var rawText = "back";
+        var userHtml = '<div class="outgoing_msg" ><div class="sent_msg"><p>'+rawText+'</p></div></div>';
+        $(".write_msg").val("");
+        
+        document.getElementById('inp').scrollTop=document.getElementById('inp').scrollHeight;
+        $.get("/get", { msg: rawText }).done(function(data) {
+          var botHtml = '<div class="incoming_msg"><div class="incoming_msg_img"> <img src="/static/profile.png" alt=".."> </div><div class="received_msg"><div class="received_withd_msg"><p>'+data+'</p></div><button onclick="getBotResponse1()"class="btn btn-outline-primary" style="margin-bottom:5px;border-radius:30px;"type="submit">Back</button></div></div>';
           $(".msg_history").append(botHtml);
           document.getElementById('inp').scrollTop=document.getElementById('inp').scrollHeight;
         });
@@ -196,6 +216,7 @@ img{ max-width:100%;}
       $(".msg_send_btn").click(function() {
         getBotResponse();
       })
+    
     </script>
     </body>
     </html>
