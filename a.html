@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.12.0/css/mdb.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<script>
+function hider(){
+var elem=document.getElementById("hiding");
+if(elem.innerHTML=="chatbot")
+elem.innerHTML="close";
+else 
+elem.innerHTML="chatbot";
+var elem1=document.getElementById("bot");
+if(elem1.style.opacity=="1")
+elem1.style.opacity="0";
+else
+elem1.style.opacity="1";
+return false;
+}
+</script>
+<iframe src="http://192.168.43.11:81/index.html" id="bot" frameBorder="0" scrolling="no" width="500px" height="600px" style="float:right;opacity:0;right:0;position:fixed;bottom:0;margin-right:20px;margin-bottom:50px"></iframe>
+<button class="btn blue-gradient" id="hiding" onclick="hider()" style="bottom:0;right:0;position:fixed;margin-right:20px">chatbot</button>
+</body>
+</html>
